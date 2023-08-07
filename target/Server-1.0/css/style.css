@@ -34,6 +34,7 @@ html{
         .contenedor-titulo{
             .titulo{
                 text-align-last: center;
+                margin: 0.7rem 3rem;
             }
         }
         .formulario{
@@ -62,22 +63,25 @@ html{
 }
 
 .list{
-
+    height: auto;
     .contenedor-list{
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
         margin: 2rem 0rem;
-        padding: 1.3rem 2.3rem;
+        padding: 3.3rem 2.3rem;
         border-radius: 0.5rem;
         .title{
 
         }
         .info{
+
+            margin: 0.9rem 0;
             .info-total{
                 .info-total-title{
-
+                    font-size: 1.2rem;
                 }
-                .info-total-title{
-
+                .info-total-valor{
+                    font-weight: bold;
+                    font-size: 1.2rem;
                 }
             }
         }

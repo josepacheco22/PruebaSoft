@@ -21,18 +21,6 @@ public class Consulta {
     private static String StringUrl = "https://obpreprod.sidesoftcorp.com/happypreprod//org.openbravo.service.json.jsonrest/MaterialMgmtStorageDetail";
 
     public Consulta() {
-        /*try {
-            DesactivarSSL();
-            URL url = new URL(StringUrl);
-            String encoding = Base64.getEncoder().encodeToString((NombreUsuario + ":" + Contrasena).getBytes());
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Authorization", "Basic " + encoding);
-            connection.connect();
-        } catch (Exception e) {
-            System.out.println("Error: " + e.toString());
-        }*/
     }
     public static HttpURLConnection Conexion(String NombreUsuario, String Contrasena) {
         try {
@@ -79,7 +67,6 @@ public class Consulta {
     public static StringBuilder ConsultaGet(String NombreUsuario, String Contrasena) {
         StringBuilder informacionString = new StringBuilder();
         try {
-            DesactivarSSL();
             //connection = Conexion(NombreUsuario, Contrasena);
             Scanner scanner = new Scanner(Conexion(NombreUsuario, Contrasena).getInputStream());
             while (scanner.hasNext()) {

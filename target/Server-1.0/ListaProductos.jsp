@@ -53,7 +53,7 @@
             <div class="info">
                 <div  class="info-total">
                     <label class="info-total-title">Cantidad de Productos: </label>
-                    <span class="info-total-valor"> <%= totalRows%></span>
+                    <span class="info-total-valor"> <%= data.length()%></span>
                 </div>
             </div>
 
