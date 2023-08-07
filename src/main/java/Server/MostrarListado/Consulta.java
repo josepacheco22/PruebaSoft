@@ -19,10 +19,9 @@ import java.security.cert.X509Certificate;
 public class Consulta {
 
     private static String StringUrl = "https://obpreprod.sidesoftcorp.com/happypreprod//org.openbravo.service.json.jsonrest/MaterialMgmtStorageDetail";
-    private static HttpURLConnection connection;
 
-    public Consulta(String NombreUsuario, String Contrasena) {
-        try {
+    public Consulta() {
+        /*try {
             DesactivarSSL();
             URL url = new URL(StringUrl);
             String encoding = Base64.getEncoder().encodeToString((NombreUsuario + ":" + Contrasena).getBytes());
@@ -33,11 +32,27 @@ public class Consulta {
             connection.connect();
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
+        }*/
+    }
+    public static HttpURLConnection Conexion(String NombreUsuario, String Contrasena) {
+        try {
+            DesactivarSSL();
+            URL url = new URL(StringUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            String encoding = Base64.getEncoder().encodeToString((NombreUsuario + ":" + Contrasena).getBytes());
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Authorization", "Basic " + encoding);
+            connection.connect();
+            return connection;
+        } catch (Exception e) {
+            return null;//System.out.println("Error: " + e.toString());
         }
     }
     
-    public static JSONObject EnviarListaProductos() {
-        JSONObject jsonObsject = new JSONObject(ConsultaGet().toString());
+    public static JSONObject EnviarListaProductos(String NombreUsuario, String Contrasena) {
+        JSONObject jsonObsject = new JSONObject(ConsultaGet(NombreUsuario, Contrasena).toString());
         return jsonObsject;
     }
 
@@ -61,11 +76,12 @@ public class Consulta {
         }
     }
 
-    public static StringBuilder ConsultaGet() {
+    public static StringBuilder ConsultaGet(String NombreUsuario, String Contrasena) {
         StringBuilder informacionString = new StringBuilder();
         try {
             DesactivarSSL();
-            Scanner scanner = new Scanner(connection.getInputStream());
+            //connection = Conexion(NombreUsuario, Contrasena);
+            Scanner scanner = new Scanner(Conexion(NombreUsuario, Contrasena).getInputStream());
             while (scanner.hasNext()) {
                 informacionString.append(scanner.nextLine());
             }

@@ -33,10 +33,10 @@
             <%
                 String NombreUsuario = request.getParameter("NombreUsuario");
                 String Contrasena = request.getParameter("Contrasena");
-                Consulta Consulta = new Consulta(NombreUsuario, Contrasena);
+                Consulta Consulta = new Consulta();
         
         
-                JSONObject jsonObsject = Consulta.EnviarListaProductos();
+                JSONObject jsonObsject = Consulta.EnviarListaProductos(NombreUsuario, Contrasena);
                 JSONObject OJSresponse = jsonObsject.getJSONObject("response");
                 JSONArray data = OJSresponse.getJSONArray("data");
                 int status = Integer.parseInt(OJSresponse.get("status").toString());
