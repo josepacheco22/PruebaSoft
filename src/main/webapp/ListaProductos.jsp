@@ -33,12 +33,22 @@
             <%
                 String NombreUsuario = request.getParameter("NombreUsuario");
                 String Contrasena = request.getParameter("Contrasena");
+                
+                if (NombreUsuario.length() < 3 || Contrasena.length() < 3) {
+                    request.setAttribute("Error","si");
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                }
+                
                 Consulta Consulta = new Consulta();
-        
+                
         
                 JSONObject jsonObsject = Consulta.EnviarListaProductos(NombreUsuario, Contrasena);
                 JSONObject OJSresponse = jsonObsject.getJSONObject("response");
                 JSONArray data = OJSresponse.getJSONArray("data");
+                if (data.length() == 0) {
+                    request.setAttribute("Error","si");
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                }
                 int status = Integer.parseInt(OJSresponse.get("status").toString());
                 int totalRows = Integer.parseInt(OJSresponse.get("totalRows").toString());
                 int startRow = Integer.parseInt(OJSresponse.get("startRow").toString());
@@ -58,14 +68,14 @@
             </div>
 
             <%! int i = 0;%>
-            <table border="1">
+            <table border="1" class="table td">
                 <thead>
                     <tr>
-                        <th class="text-align-center p-05">N°</th>
-                        <th class="p-05">Descripción</th>
-                        <th class="p-05">Identificador</th>
-                        <th class="p-05">Unidades Disponibles</th>
-                        <th class="p-05">Tienda</th>
+                        <th class="th text-align-center p-05">N°</th>
+                        <th class="th p-05">Descripción</th>
+                        <th class="th p-05">Identificador</th>
+                        <th class="th p-05">Unidades Disponibles</th>
+                        <th class="th p-05">Tienda</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +83,7 @@
 
 
                     <%
+                        i = 0;
                     while (i < data.length()) {%>
                     <tr>
 
@@ -80,11 +91,11 @@
                         <%  JSONObject variableVolatil = new JSONObject(data.get(i).toString());%>
 
 
-                        <td class="text-align-center px-06"><%= i + 1%></td>
-                        <td class="px-06"><%= variableVolatil.get("_identifier")%></td>
-                        <td class="px-06"><%= variableVolatil.get("product")%></td>
-                        <td class="text-align-right px-06"><%= variableVolatil.get("quantityOnHand")%></td>
-                        <td class="px-06"><%= variableVolatil.get("client$_identifier")%></td>
+                        <td class="text-align-center p-06"><%= i + 1%></td>
+                        <td class="p-06"><%= variableVolatil.get("_identifier")%></td>
+                        <td class="p-06"><%= variableVolatil.get("product")%></td>
+                        <td class="text-align-right p-06"><%= variableVolatil.get("quantityOnHand")%></td>
+                        <td class="p-06"><%= variableVolatil.get("client$_identifier")%></td>
 
                         <% i++; %>
                     </tr>

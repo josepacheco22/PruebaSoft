@@ -57,6 +57,7 @@ html{
                 font-size: 1.2rem;
                 margin-top: 0.5rem;
                 border: 0;
+                cursor: pointer;
             }
         }
     }
@@ -92,10 +93,18 @@ html{
             text-align: right;
         }
         .p-05{
-            padding-inline:0.5rem;
+            padding:0.5rem;
         }
-        .px-06{
-            padding-inline:0.6rem;
+        .p-06{
+                padding: 0.6rem;
+        }
+    }
+    
+    .table,.th,.td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        .th{
+            cursor: pointer;
         }
     }
 }

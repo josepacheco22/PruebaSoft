@@ -56,10 +56,18 @@ public class Listado extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
         //Consulta.ValidarConexion();
-        request.getRequestDispatcher("/ListaProductos.jsp").forward(request, response);
+        String NombreUsuario = request.getParameter("NombreUsuario");
+        String Contrasena = request.getParameter("Contrasena");
+        if (NombreUsuario.length() < 3 || Contrasena.length() < 3) {
+            request.setAttribute("Error", "si");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }else{
+            request.setAttribute("Error", "no");
+            request.getRequestDispatcher("/ListaProductos.jsp").forward(request, response);
             processRequest(request, response);
+        }
+
         /*if (Consulta.ValidarConexion()) {
             request.getRequestDispatcher("/ListaProductos.jsp").forward(request, response);
             processRequest(request, response);

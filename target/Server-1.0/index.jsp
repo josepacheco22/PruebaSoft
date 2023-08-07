@@ -19,8 +19,8 @@
             </div>
             <form action="Listado" method="post" class="formulario">
                 <hr class="formulario-hr">
-                <input class="formulario-input" placeholder="Usuario" type="text" name="NombreUsuario" id="NombreUsuario">
-                <input class="formulario-input" placeholder="Contraseña" type="password" name="Contrasena" id="Contrasena">
+                <input class="formulario-input" minlength="3" placeholder="Usuario" type="text" name="NombreUsuario" id="NombreUsuario">
+                <input class="formulario-input" minlength="3" placeholder="Contraseña" type="password" name="Contrasena" id="Contrasena">
                 <hr class="formulario-hr">
                 <input class="formulario-submit" type="submit" name="Entrar" id="Entrar" value="Entrar">
             </form>
