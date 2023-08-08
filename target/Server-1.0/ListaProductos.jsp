@@ -7,6 +7,8 @@
 
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Server.MostrarListado.DataJson"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="Server.MostrarListado.Consulta"%>
 <%@page import="org.json.JSONObject"%>
@@ -33,41 +35,33 @@
             <%
                 String NombreUsuario = request.getParameter("NombreUsuario");
                 String Contrasena = request.getParameter("Contrasena");
-                
+
                 if (NombreUsuario.length() < 3 || Contrasena.length() < 3) {
-                    request.setAttribute("Error","si");
+                    request.setAttribute("Error", "si");
                     request.getRequestDispatcher("/index.jsp").forward(request, response);
                 }
-                
-                Consulta Consulta = new Consulta();
-                
-        
-                JSONObject jsonObsject = Consulta.EnviarListaProductos(NombreUsuario, Contrasena);
-                JSONObject OJSresponse = jsonObsject.getJSONObject("response");
-                JSONArray data = OJSresponse.getJSONArray("data");
-                if (data.length() == 0) {
-                    request.setAttribute("Error","si");
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                }
-                int status = Integer.parseInt(OJSresponse.get("status").toString());
-                int totalRows = Integer.parseInt(OJSresponse.get("totalRows").toString());
-                int startRow = Integer.parseInt(OJSresponse.get("startRow").toString());
-                int endRow = Integer.parseInt(OJSresponse.get("endRow").toString());
+                List<DataJson> ArrayListaProductos = Consulta.ConvertirJsonList(NombreUsuario, Contrasena);
+                //DataJson[] ArrayListaProductos = Consulta.ConvertirJsonArray(NombreUsuario, Contrasena);
+                /*int i = 0;
+                while (i < ArrayListaProductos.length) {
+
+                    //DataJson DataJson = new DataJson(data.get(i).toString());
+                   // ArrayListaProductos[i] = DataJson;
+                    
+                    System.out.println(i);
+                    //DataJson DataJson2 = ArrayListaProductos.get(i);
+                    System.out.println(ArrayListaProductos[i]._identifier);
+                    i++;
+                }*/
+
             %>
 
 
 
             <h1 class="title">Lista de Productos </h1>
 
-            
-            <div class="info">
-                <div  class="info-total">
-                    <label class="info-total-title">Cantidad de Productos: </label>
-                    <span class="info-total-valor"> <%= data.length()%></span>
-                </div>
-            </div>
 
-            <%! int i = 0;%>
+
             <table border="1" class="table td">
                 <thead>
                     <tr>
@@ -79,27 +73,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
-
-
-                    <%
-                        i = 0;
-                    while (i < data.length()) {%>
-                    <tr>
-
-
-                        <%  JSONObject variableVolatil = new JSONObject(data.get(i).toString());%>
-
-
-                        <td class="text-align-center p-06"><%= i + 1%></td>
-                        <td class="p-06"><%= variableVolatil.get("_identifier")%></td>
-                        <td class="p-06"><%= variableVolatil.get("product")%></td>
-                        <td class="text-align-right p-06"><%= variableVolatil.get("quantityOnHand")%></td>
-                        <td class="p-06"><%= variableVolatil.get("client$_identifier")%></td>
-
-                        <% i++; %>
-                    </tr>
-                    <%}%>
 
                 </tbody>
             </table>
