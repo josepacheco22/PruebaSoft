@@ -1,6 +1,5 @@
+Server\MostrarListado\Consulta$1.class
 Server\MostrarListado\Listado.class
 ec\com\gm\Server\resources\JavaEE8Resource.class
-ec\com\gm\Server\JAXRSConfiguration.class
-Server\MostrarListado\Consulta$1.class
-Server\MostrarListado\DataJson.class
 Server\MostrarListado\Consulta.class
+ec\com\gm\Server\JAXRSConfiguration.class

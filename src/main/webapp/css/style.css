@@ -104,7 +104,12 @@ html{
         border: 1px solid black;
         border-collapse: collapse;
         .th{
-            cursor: pointer;
+            
+            .table-orden{
+                text-decoration: none;
+                color: black;
+            }
         }
+        
     }
 }
