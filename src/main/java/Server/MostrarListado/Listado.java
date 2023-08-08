@@ -56,7 +56,6 @@ public class Listado extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //Consulta.ValidarConexion();
         String NombreUsuario = request.getParameter("NombreUsuario");
         String Contrasena = request.getParameter("Contrasena");
         if (NombreUsuario.length() < 3 || Contrasena.length() < 3) {
@@ -67,14 +66,6 @@ public class Listado extends HttpServlet {
             request.getRequestDispatcher("/ListaProductos.jsp").forward(request, response);
             processRequest(request, response);
         }
-
-        /*if (Consulta.ValidarConexion()) {
-            request.getRequestDispatcher("/ListaProductos.jsp").forward(request, response);
-            processRequest(request, response);
-        } else {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-            processRequest(request, response);
-        }*/
 
     }
 

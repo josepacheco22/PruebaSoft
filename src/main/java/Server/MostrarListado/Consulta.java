@@ -4,9 +4,6 @@
  */
 package Server.MostrarListado;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
@@ -15,12 +12,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import javax.net.ssl.*;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class Consulta {
-
     private static String StringUrl = "https://obpreprod.sidesoftcorp.com/happypreprod//org.openbravo.service.json.jsonrest/MaterialMgmtStorageDetail";
 
     public static HttpURLConnection Conexion(String NombreUsuario, String Contrasena) {
@@ -75,7 +70,6 @@ public class Consulta {
     public static StringBuilder ConsultaGet(String NombreUsuario, String Contrasena) {
         StringBuilder informacionString = new StringBuilder();
         try {
-            //connection = Conexion(NombreUsuario, Contrasena);
             Scanner scanner = new Scanner(Conexion(NombreUsuario, Contrasena).getInputStream());
             while (scanner.hasNext()) {
                 informacionString.append(scanner.nextLine());
